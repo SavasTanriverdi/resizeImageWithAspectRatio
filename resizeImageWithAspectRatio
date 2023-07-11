@@ -1,0 +1,28 @@
+/**
+ * A method that resizes the image to the specified maximum size while maintaining the aspect ratio.
+ * It takes the original Bitmap image and scales it down to fit the given maximum width and height.
+ * Handles both landscape and portrait images correctly, preserving the aspect ratio.
+ *
+ * @param image      The Bitmap image to be resized.
+ * @param maxSize    The specified maximum size value.
+ * @return           The resized Bitmap image.
+ */
+
+public Bitmap resizeImageWithAspectRatio(Bitmap image, int maxSize) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    float bitmapRatio = (float) width / (float) height;
+
+    if (bitmapRatio > 1) {
+        //landscape image
+        width = maxSize;
+        height = (int) (width / bitmapRatio);
+    } else {
+        //portrait image
+        height = maxSize;
+        width = (int) (height * bitmapRatio);
+    }
+
+    return Bitmap.createScaledBitmap(image, width, height, true);
+}
